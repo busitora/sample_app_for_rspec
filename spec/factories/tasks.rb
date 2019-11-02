@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :task do
-    title {'テストタイトル'}
-    content {'テストコンテント'}
+    title {"テストタイトル"}
+    content {"テストコンテント"}
     status {:todo}
-    user
+    user_id {1}
   end
 end
