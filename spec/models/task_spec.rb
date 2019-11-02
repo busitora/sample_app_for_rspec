@@ -5,43 +5,46 @@ RSpec.describe Task, type: :model do
 
   let(:user) {FactoryBot.create(:user)}
   # let で インスタンス変数のように定義し、FBでデータを作成
-  context "タイトルのバリデーションに関するテスト" do
-
-    it "タイトルが空ならエラーになる" do
-      task = Task.new(
-       content: "テストコンテンツ",
-       user_id: user.id,
-       status: 0
-      )
-      expect(task).not_to be_valid
+  describe "タイトルのバリデーションに関するテスト" do
+    context "タイトルが空の時" do
+      it "エラーになる" do
+        task = Task.new(
+          content: "テストコンテンツ",
+          user_id: user.id,
+          status: 0
+        )
+        expect(task).not_to be_valid
+      end
     end
+    context "タイトルが重複している時" do
+      it "エラーになる" do
+        Task.create(
+          title: "テストタイトル",
+          content: "テストコンテンツ",
+          user_id: user.id,
+          status: 0
+        )
 
-    it "タイトルが重複していればエラーになる" do
-      Task.create(
-        title: "テストタイトル",
-        content: "テストコンテンツ",
-        user_id: user.id,
-        status: 0
-      )
-
-      task = Task.new(
-        title: "テストタイトル",
-        content: "テストコンテンツ",
-        user_id: user.id,
-        status: 0
-      )
-      expect(task.valid?).to eq(false)
+        task = Task.new(
+          title: "テストタイトル",
+          content: "テストコンテンツ",
+          user_id: user.id,
+          status: 0
+        )
+        expect(task.valid?).to eq(false)
+      end
     end
   end
 
-  context "ステータスのバリデーションに関するテスト" do
-
-    it "ステータスが空ならエラーになる" do
-      task = Task.new(
-        content: "テストコンテンツ",
-        user_id: user.id,
-      )
-      expect(task).not_to be_valid
+  describe "ステータスのバリデーションに関するテスト" do
+    context "ステータスが空の時" do
+      it "エラーになる" do
+        task = Task.new(
+          content: "テストコンテンツ",
+          user_id: user.id,
+        )
+        expect(task).not_to be_valid
+      end
     end
   end
 end
