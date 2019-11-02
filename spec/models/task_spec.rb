@@ -4,6 +4,7 @@ RSpec.describe Task, type: :model do
 
   describe "バリデーションのテスト" do
     let(:user) {create(:user)}
+    # let(:task) {create(:task)}
     # let で インスタンス変数のように定義し、FBでデータを作成
 
     # 正常系
