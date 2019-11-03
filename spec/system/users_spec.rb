@@ -42,10 +42,6 @@ RSpec.describe "Users", type: :system do
           it "ユーザーの編集が失敗" do
           end
         end
-        context "他ユーザーの編集ページにアクセスした時" do
-          it "権限がないためアクセスが失敗する" do
-          end
-        end
       end
 
       describe "マイページにアクセスした時" do
