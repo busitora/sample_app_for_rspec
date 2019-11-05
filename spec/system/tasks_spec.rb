@@ -84,12 +84,14 @@ RSpec.describe "Tasks", type: :system do
       end
       describe "タスクの一覧画面" do
         # 正常系
+        let!(:task) {create(:task, user_id: user.id)}
+        # 呼ばれる前に呼ぶ
         context "Destroyボタンをクリックした時"
         it "タスクの削除に成功する" do
           login(user)
           task
-          click_link("Logout")
-          expect(page.driver.browser.switch_to.alert.text).to eq "Are you sure?"
+          click_link("Destroy")
+          page.driver.browser.switch_to.alert.accept
           expect(page).to have_content "Task was successfully destroyed."
         end
       end
