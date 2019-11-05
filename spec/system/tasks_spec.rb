@@ -49,6 +49,8 @@ RSpec.describe "Tasks", type: :system do
             # expect(task_path(task.id)).to eq(current_path)
             # TODO この書き方だとletのtaskが呼ばれる。要修正
             expect(page).to have_content "Task was successfully created."
+            expect(page).to have_content "最初のタスク"
+            expect(page).to have_content "最初のコンテント"
           end
         end
       end
