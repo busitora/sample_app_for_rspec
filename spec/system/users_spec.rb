@@ -52,13 +52,11 @@ RSpec.describe "Users", type: :system do
           end
         end
       end
-      describe "マイページへアクセスした時" do
-        context "自分のマイページの時" do
-          it "ログイン前なので推移に失敗する" do
-            visit edit_user_path(user)
-            expect(login_path).to eq(current_path)
-            expect(page).to have_content "Login required"
-          end
+      context "自分の編集ページにアクセスした時" do
+        it "ログイン前なので推移に失敗する" do
+          visit edit_user_path(user)
+          expect(login_path).to eq(current_path)
+          expect(page).to have_content "Login required"
         end
       end
     end

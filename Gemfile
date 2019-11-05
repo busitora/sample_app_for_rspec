@@ -11,6 +11,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'sorcery'
+gem 'pry-byebug'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
