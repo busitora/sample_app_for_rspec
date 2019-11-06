@@ -132,6 +132,15 @@ RSpec.describe "Users", type: :system do
             # 新規作成したタスク(このテストでは指定)が表示されていることを検証
           end
         end
+        # 異常系
+        context "他人のマイページの時" do
+          it "権限がないためアクセスに失敗する" do
+            login(user)
+            visit user_path(other_user)
+            expect(user_path(user)).to eq(current_path)
+            expect(page).to have_content "Forbidden access."
+          end
+        end
       end
     end
   end
