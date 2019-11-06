@@ -42,6 +42,8 @@ RSpec.describe "UserSessions", type: :system do
           click_link("Logout")
           expect(root_path).to eq(current_path)
           expect(page).to have_content "Logged out"
+          expect(page).to have_content "Tasks"
+          # ログアウト後にrootに飛んでいるか、rootのh1が表示されているかを検証
         end
       end
     end
