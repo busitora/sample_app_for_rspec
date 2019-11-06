@@ -92,6 +92,8 @@ RSpec.describe "Tasks", type: :system do
           click_link("Destroy")
           page.driver.browser.switch_to.alert.accept
           expect(page).to have_content "Task was successfully destroyed."
+          expect(page).not_to have_content task.title
+          expect(page).not_to have_content task.content
         end
       end
     end
