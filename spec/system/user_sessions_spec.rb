@@ -15,7 +15,10 @@ RSpec.describe "UserSessions", type: :system do
           fill_in "Email", with: user.email
           fill_in "Password", with: "password"
           click_button("Login")
+          expect(root_path).to eq(current_path)
           expect(page).to have_content "Login successful"
+          expect(page).to have_content "Tasks"
+          # ログイン後にrootに飛んでいるか、rootのh1が表示されているかを検証
         end
       end
       # 異常系
