@@ -37,9 +37,9 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password"
             fill_in "Password confirmation", with: "password"
             click_button("SignUp")
-            expect(users_path).to eq(current_path)
-            # 現在のURLが、users_pathにリダイレクトされていることを検証
             expect(page).to have_content "Email can't be blank"
+            expect(users_path).to eq(current_path)
+            # 現在のURLが、users_pathにレンダーされていることを検証
           end
         end
         context "登録済メールアドレスの時" do
