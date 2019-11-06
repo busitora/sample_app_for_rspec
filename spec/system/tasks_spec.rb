@@ -65,7 +65,9 @@ RSpec.describe "Tasks", type: :system do
             select "doing", from: "Status"
             fill_in "Deadline", with: '31 December 201'
             click_button("Update Task")
-            expect(page).to have_content 'Task was successfully updated.'
+            expect(page).to have_content "Task was successfully updated."
+            expect(page).to have_content Task.first.title
+            expect(page).to have_content Task.first.content
           end
         end
         # 異常系
