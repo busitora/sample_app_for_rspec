@@ -77,6 +77,7 @@ RSpec.describe "Users", type: :system do
             click_button("Update")
             expect(user_path(user)).to eq(current_path)
             expect(page).to have_content "User was successfully updated."
+            expect(page).to have_content User.first.email
           end
         end
 
