@@ -29,6 +29,7 @@ RSpec.describe "UserSessions", type: :system do
           fill_in "Email", with: ""
           fill_in "Password", with: "password"
           click_button("Login")
+          expect(login_path).to eq current_path
           expect(page).to have_content "Login failed"
         end
       end
