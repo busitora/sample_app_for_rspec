@@ -22,6 +22,10 @@ RSpec.describe "Users", type: :system do
             expect(login_path).to eq(current_path)
             expect(page).to have_content "User was successfully created."
             # ユーザーが作成されたことを検証する
+            login(User.first)
+            visit user_path(User.first)
+            expect(page).to have_content User.first.email
+            # ログイン画面でアドレスは確認できないのでマイページに行き登録されていることを確認
           end
         end
 
