@@ -76,7 +76,7 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password2"
             fill_in "Password confirmation", with: "password2"
             click_button("Update")
-            expect(user_path(user)).to eq(current_path)
+            expect(current_path).to eq(user_path(other_user))
             expect(page).to have_content "User was successfully updated."
             expect(page).to have_content User.first.email
           end
@@ -91,7 +91,7 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password2"
             fill_in "Password confirmation", with: "password2"
             click_button("Update")
-            expect(user_path(user)).to eq(current_path)
+            expect(current_path).to eq(user_path(other_user))
             expect(page).to have_content "Email can't be blank"
           end
         end
@@ -105,7 +105,7 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password2"
             fill_in "Password confirmation", with: "password2"
             click_button("Update")
-            expect(user_path(other_user)).to eq(current_path)
+            expect(current_path).to eq(user_path(other_user))
             expect(page).to have_content "Email has already been taken"
           end
         end
@@ -114,7 +114,7 @@ RSpec.describe "Users", type: :system do
             login(user)
             visit edit_user_path(other_user)
             # 他人の編集ページは権限がない
-            expect(user_path(user)).to eq(current_path)
+            expect(current_path).to eq(user_path(user))
             expect(page).to have_content "Forbidden access."
           end
         end
@@ -136,7 +136,7 @@ RSpec.describe "Users", type: :system do
           it "権限がないためアクセスに失敗する" do
             login(user)
             visit user_path(other_user)
-            expect(user_path(user)).to eq(current_path)
+            expect(current_path).to eq(user_path(user))
             expect(page).to have_content "Forbidden access."
           end
         end
