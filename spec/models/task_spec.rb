@@ -23,6 +23,7 @@ RSpec.describe Task, type: :model do
           task = build(:task, title: "")
           # create ではなく build。 validation は create の前に走る。タイトルを空にしたケース
           expect(task).not_to be_valid
+          expect(task.errors.messages[:title]).to include("can't be blank")
         end
       end
 
@@ -32,6 +33,7 @@ RSpec.describe Task, type: :model do
           # Factory.Botから tasks.rb を呼びtaskを登録
           duplicated_task = build(:task, title: task.title)
           expect(duplicated_task.valid?).to eq(false)
+          expect(duplicated_task.errors.messages[:title]).to include("has already been taken")
         end
       end
     end
@@ -41,6 +43,7 @@ RSpec.describe Task, type: :model do
         it "エラーになる" do
           task = build(:task, status: "")
           expect(task).not_to be_valid
+          expect(task.errors.messages[:status]).to include("can't be blank")
         end
       end
     end
