@@ -22,7 +22,7 @@ RSpec.describe "Users", type: :system do
             expect(login_path).to eq(current_path)
             expect(page).to have_content "User was successfully created."
             # ユーザーが作成されたことを検証する
-            user = User.find_by(email: "user@example.com" )
+            user = User.find_by(email: "user@example.com")
             login(user)
             visit user_path(user)
             expect(page).to have_content user.email
@@ -78,7 +78,7 @@ RSpec.describe "Users", type: :system do
             click_button("Update")
             expect(current_path).to eq(user_path(user))
             expect(page).to have_content "User was successfully updated."
-            user = User.find_by(email: "test2@example.com" )
+            user = User.find_by(email: "test2@example.com")
             expect(page).to have_content user.email
           end
         end
@@ -123,9 +123,11 @@ RSpec.describe "Users", type: :system do
 
       describe "マイページにアクセスした時" do
         # 正常系
+        before do
+          login(user)
+        end
         context "自分のマイページの時" do
           it "新規作成したタスクが表示される" do
-            login(user)
             task
             visit user_path(user)
             expect(page).to have_content "最初のタスク"
@@ -135,7 +137,6 @@ RSpec.describe "Users", type: :system do
         # 異常系
         context "他人のマイページの時" do
           it "権限がないためアクセスに失敗する" do
-            login(user)
             visit user_path(other_user)
             expect(current_path).to eq(user_path(user))
             expect(page).to have_content "Forbidden access."
