@@ -14,7 +14,7 @@ RSpec.describe "Tasks", type: :system do
         context "権限がないため" do
           it "アクセスに失敗する" do
             visit new_task_path
-            expect(login_path).to eq(current_path)
+            expect(current_path).to eq(login_path)
             expect(page).to have_content "Login required"
             # ログインせずに新規作成は出来ずに、login画面へリダイレクト
           end
@@ -25,7 +25,7 @@ RSpec.describe "Tasks", type: :system do
         context "権限がないため" do
           it "アクセスに失敗する" do
             visit edit_task_path(user)
-            expect(login_path).to eq(current_path)
+            expect(current_path).to eq(login_path)
             expect(page).to have_content "Login required"
             # ログインせずに編集画面にはリダイレクト出来ずに、login画面へ
           end
@@ -75,7 +75,7 @@ RSpec.describe "Tasks", type: :system do
             other_task
             # 他のタスクを作成
             visit edit_task_path(other_task)
-            expect(root_path).to eq(current_path)
+            expect(current_path).to eq(root_path)
             # 他人の編集ページにアクセスしたのでリダイレクト
             expect(page).to have_content "Forbidden access."
           end
