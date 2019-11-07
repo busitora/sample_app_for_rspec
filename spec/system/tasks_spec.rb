@@ -24,7 +24,6 @@ RSpec.describe "Tasks", type: :system do
       describe "タスクの編集画面" do
         context "権限がないため" do
           it "アクセスに失敗する" do
-            user
             visit edit_task_path(user)
             expect(login_path).to eq(current_path)
             expect(page).to have_content "Login required"
