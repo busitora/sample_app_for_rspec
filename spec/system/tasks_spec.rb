@@ -13,7 +13,6 @@ RSpec.describe "Tasks", type: :system do
       describe "タスクの新規作成画面" do
         context "権限がないため" do
           it "アクセスに失敗する" do
-            user
             visit new_task_path
             expect(login_path).to eq(current_path)
             expect(page).to have_content "Login required"
