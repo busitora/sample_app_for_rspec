@@ -76,9 +76,10 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password2"
             fill_in "Password confirmation", with: "password2"
             click_button("Update")
-            expect(current_path).to eq(user_path(other_user))
+            expect(current_path).to eq(user_path(user))
             expect(page).to have_content "User was successfully updated."
-            expect(page).to have_content User.first.email
+            user = User.find_by(email: "test2@example.com" )
+            expect(page).to have_content user.email
           end
         end
 
@@ -91,7 +92,7 @@ RSpec.describe "Users", type: :system do
             fill_in "Password", with: "password2"
             fill_in "Password confirmation", with: "password2"
             click_button("Update")
-            expect(current_path).to eq(user_path(other_user))
+            expect(current_path).to eq(user_path(user))
             expect(page).to have_content "Email can't be blank"
           end
         end
