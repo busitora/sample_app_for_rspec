@@ -34,11 +34,13 @@ RSpec.describe "Tasks", type: :system do
     end
 
     describe "ログイン後のケース" do
+      before do
+        login(user)
+      end
       describe "タスクの新規作成画面" do
         # 正常系
         context "フォームの入力値が全て正しい時" do
           it "タスクの新規作成に成功する" do
-            login(user)
             visit new_task_path
             fill_in "Title", with: "最初のタスク"
             fill_in "Content", with: "最初のコンテント"
@@ -56,7 +58,6 @@ RSpec.describe "Tasks", type: :system do
         # 正常系
         context "フォームの入力値が全て正しい時" do
           it "タスクの編集に成功する" do
-            login(user)
             visit edit_task_path(task)
             fill_in "Title", with: "2つ目のタスク"
             fill_in "Content", with: "2つめのタスクに変更"
@@ -71,8 +72,6 @@ RSpec.describe "Tasks", type: :system do
         # 異常系
         context "他ユーザーの編集ページにアクセスした時" do
           it "権限がないためアクセスが失敗する" do
-            login(user)
-            other_task
             # 他のタスクを作成
             visit edit_task_path(other_task)
             expect(current_path).to eq(root_path)
