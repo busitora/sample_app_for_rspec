@@ -112,7 +112,6 @@ RSpec.describe "Users", type: :system do
         context "他人の編集ページへのアクセスの場合" do
           it "権限がないためアクセスに失敗する" do
             login(user)
-            task
             visit edit_user_path(other_user)
             # 他人の編集ページは権限がない
             expect(user_path(user)).to eq(current_path)
@@ -127,7 +126,6 @@ RSpec.describe "Users", type: :system do
           it "新規作成したタスクが表示される" do
             login(user)
             task
-            # タスクをletで1件作成
             visit user_path(user)
             expect(page).to have_content "最初のタスク"
             # 新規作成したタスク(このテストでは指定)が表示されていることを検証
